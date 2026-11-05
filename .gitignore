@@ -1,0 +1,38 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Node
+node_modules/
+dist/
+build/
+coverage/
+.pnpm-store/
+*.log
+
+# Python
+__pycache__/
+.venv/
+venv/
+*.pyc
+
+# DSH local state
+.dsh/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Editors
+.vscode/
+.idea/
+*.swp

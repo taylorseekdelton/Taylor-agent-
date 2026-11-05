@@ -1,0 +1,44 @@
+name: Agent task
+description: 给 Taylor 的 DSH agent 派一个可验收的任务
+title: "[agent] "
+labels:
+  - agent
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: 目标
+      description: 要完成什么？一句话说清结果，不要只写“优化一下”。
+      placeholder: 例如：给仓库加一个 check-env 脚本，检查 git/node/pnpm/dsh。
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 怎么判断做完了？列出可检查的条目。
+      placeholder: |
+        - 脚本存在且可执行
+        - 缺工具时退出码为 1
+        - README 有使用说明
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: 边界
+      description: 哪些不能做？例如不许改系统配置、不许装全局软件、只改某个目录。
+      placeholder: 只改 scripts/ 和 README；不要动 ~/.dsh 和系统 PATH。
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充上下文
+      description: 相关链接、错误日志、截图、已有尝试。
+      placeholder: 相关 issue、日志或文件路径。
+    validations:
+      required: false
