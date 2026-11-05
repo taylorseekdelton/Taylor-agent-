@@ -24,6 +24,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check-env.ps1
 
 本机访问 `github.com:443` 会超时，但 `ssh.github.com:443` 可用。因此仓库使用 **SSH over 443**。
 
+本仓库已通过 `repo` 权限自动添加了一把 **repo 级 deploy key（读写）**，所以当前仓库可以直接 clone / push。同一把公钥如果要用于账户下的其他仓库，需要手动添加到 GitHub 账户的 SSH keys；deploy key 只对这一个仓库有效。
+
 `%USERPROFILE%\.ssh\config`：
 
 ```sshconfig
@@ -89,7 +91,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check-env.ps1
 
 ## 5. 当前已知缺口
 
-- Git 已安装到 `E:\CLI\Git`，但旧终端需要重开才能继承用户 PATH。
-- `gh` 已安装到 `E:\CLI\gh.exe`，但当前 token 只有 `repo` 权限，`gh auth login` 会因缺少 `read:org` 拒绝保存。
-- SSH 公钥需要手动加到 GitHub；当前 token 没有 `admin:public_key`，无法代加。
+- Git 已安装到 `E:\CLI\Git`，用户 PATH 也已更新；**旧的终端窗口需要重开**才能继承。
+- `node`、`pnpm`、`dsh` 已通过 DSH 自带运行时加入用户 PATH，新终端可直接使用。
+- `gh` 已安装到 `E:\CLI\gh.exe`，但当前 token 只有 `repo` 权限，`gh auth login` 会因缺少 `read:org` 拒绝持久登录；`git` / SSH 推送不受影响。要用 `gh` 命令，可在当前终端临时设置 `GH_TOKEN`。
+- 账户级 SSH key 仍需手动添加：当前 token 没有 `admin:public_key`，只能加 repo 级 deploy key。见 <https://github.com/settings/ssh/new>。
 - 仓库还没有业务代码和测试；第一个任务确定后再补构建命令。
